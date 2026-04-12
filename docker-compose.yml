@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  skills_bridge:
+    build: .
+    container_name: skills_bridge_app
+    restart: always
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongodb
+    env_file:
+      - .env
+
+  mongodb:
+    image: mongo:6
+    container_name: skills_bridge_db
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+
+volumes:
+  mongodb_data:
